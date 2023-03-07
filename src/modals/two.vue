@@ -1,24 +1,26 @@
 <template>
-  <vue-final-modal>
+  <vue-final-modal
+      v-slot='{ close }'
+      v-bind='$attrs'
+      :hide-overlay="true"
+      @opened="$emit('opened')"
+      @closed="$emit('closed')">
     <div>hello this is number Two</div>
-    <button @click="open(close)"> Two</button>
-    <slot />
+    <button @click="confirm(close)"> Two</button>
+    <slot/>
   </vue-final-modal>
 </template>
 
 <script>
 export default {
   name: "two",
-
   methods: {
-    open(){
+    confirm (close) {
+      close();
       console.log("Two is emitting confirm");
-      this.$emit("confirm");
+
+      this.$emit("confirmTwo");
     }
   }
 };
 </script>
-
-<style scoped>
-
-</style>

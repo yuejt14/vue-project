@@ -1,15 +1,16 @@
 <script>
 import one from "../modals/one.vue";
-
 export default {
+
   methods: {
-    open(){
+    openOne(){
       console.log("opening one");
-      this.$vfm.show({
+      let that = this;
+      that.$vfm.show({
         component: one,
         on: {
-          confirm() {
-            console.log("Home received confirm from one");
+          confirmTwo() {
+            console.log("Home received confirm");
           }
         }
       });
@@ -19,6 +20,8 @@ export default {
 </script>
 
 <template>
-  <div>this is home</div>
-  <button @click="open"> test </button>
+  <div>
+    <div>this is home</div>
+    <button @click="openOne"> test </button>
+  </div>
 </template>

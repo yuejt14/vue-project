@@ -1,7 +1,12 @@
 <template>
-  <vue-final-modal>
+  <vue-final-modal
+      v-slot='{ close }'
+      v-bind='$attrs'
+      :hide-overlay="true"
+      @opened="$emit('opened')"
+      @closed="$emit('closed')">
     <div>hello this is number one</div>
-    <button @click="open(close)"> ONE</button>
+    <button @click="openTwo(close)"> ONE</button>
     <slot />
   </vue-final-modal>
 </template>
@@ -10,27 +15,21 @@
 import two from "./two.vue";
 
 export default {
-
+  name: "one",
   methods: {
-    open(close){
-      // close();
+    openTwo(close){
+      console.log("Opening two");
       const that = this;
-      close();
-      that.$vfm.show({
+      this.$vfm.show({
         component: two,
-        on: {
-          confirm() {
+        closeModals: true,        on: {
+          confirmTwo() {
             console.log("One received from two");
-            that.$emit("confirm");
+            that.$emit("confirmTwo");
           }
         }
       });
-
     }
   }
 };
 </script>
-
-<style scoped>
-
-</style>
